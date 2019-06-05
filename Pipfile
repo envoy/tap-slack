@@ -4,9 +4,8 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-singer-python = "*"
-slackclient = "*"
-backoff = "*"
+singer-python = "==5.6.0"
+slackclient = "==2.0.1"
 
 [dev-packages]
 

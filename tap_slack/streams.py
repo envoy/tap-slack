@@ -1,7 +1,6 @@
 from slack import WebClient
 
 import singer
-import backoff
 import os
 import time
 
