@@ -43,7 +43,7 @@ The `Users` stream _does_ store information about when a User record was last up
 
 ## Table Schemas
 
-#### Conversations
+### Conversations
 
  - Table Name: `conversations`
  - Description:
@@ -51,17 +51,23 @@ The `Users` stream _does_ store information about when a User record was last up
  - Replication Strategy: `FULL_TABLE`
  - API Documentation: [Link](https://api.slack.com/methods/conversations.list)
 
+### Conversation Members
+
  - Table Name: `conversation_members`
  - Description:
  - Primary Key Column: N/A
  - Replication Strategy: `FULL_TABLE`
  - API Documentation: [Link](https://api.slack.com/methods/conversations.members)
 
+### Conversation History
+
  - Table Name: `conversation_history`
  - Description:
  - Primary Key Column: N/A
  - Replication Strategy: `FULL_TABLE`
  - API Documentation: [Link](https://api.slack.com/methods/conversations.history)
+
+### Users
 
  - Table Name: `users`
  - Description:
