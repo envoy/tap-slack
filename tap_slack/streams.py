@@ -23,6 +23,9 @@ class SlackStream():
         schema = self.load_schema()
         return singer.write_schema(stream_name=self.name, schema=schema, key_properties=self.key_properties)
 
+    def write_state(self):
+        return singer.write_state(self.state)
+
 
 class ConversationsStream(SlackStream):
     name = 'conversations'
@@ -92,7 +95,7 @@ class ConversationHistoryStream(SlackStream):
                     channels = page.get('channels')
                     for channel in channels:
                         channel_id = channel.get('id')
-                        for i, page in enumerate(self.webclient.conversations_history(channel=channel_id)):
+                        for page in self.webclient.conversations_history(channel=channel_id):
                             messages = page.get('messages')
                             for message in messages:
                                 data = {}
@@ -102,8 +105,8 @@ class ConversationHistoryStream(SlackStream):
                                     transformed_record = transformer.transform(data=data, schema=schema)
                                     singer.write_record(stream_name=self.name, time_extracted=singer.utils.now(), record=transformed_record)
                                     counter.increment()
-                                #TODO: handle rate limiting better than this.
-                                time.sleep(1)
+                            #TODO: handle rate limiting better than this.
+                            time.sleep(1)
 
 
 class UsersStream(SlackStream):
@@ -134,12 +137,11 @@ class UsersStream(SlackStream):
                                 counter.increment()
 
         self.state = singer.write_bookmark(state=self.state, tap_stream_id=self.name, key=self.replication_key, val=new_bookmark)
-        singer.write_state(self.state)
 
 
 AVAILABLE_STREAMS = [
     ConversationsStream,
-    UsersStream,
+    UsersStream
     ConversationMembersStream,
     ConversationHistoryStream
 ]

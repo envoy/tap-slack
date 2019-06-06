@@ -28,6 +28,7 @@ def sync(webclient, config, catalog, state):
     for stream in streams_to_sync:
         stream.write_schema()
         stream.sync()
+        stream.write_state()
 
     LOGGER.info('Finished Sync..')
 
