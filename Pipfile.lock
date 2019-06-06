@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "91834e4a4270a4d5e4db16e9e83affad772298c9ac763e74a5160150807ac0de"
+            "sha256": "d811da662f5f44376bd13483fbb5b66cb20263f4a2c116a3cd393da49b8ee975"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -15,7 +15,8 @@
             }
         ]
     },
-    "default": {
+    "default": {},
+    "develop": {
         "aiodns": {
             "hashes": [
                 "sha256:815fdef4607474295d68da46978a54481dd1e7be153c7d60f9e72773cd38d77d",
@@ -178,7 +179,6 @@
         },
         "pycparser": {
             "hashes": [
-                "sha256:18373b662e145d63c8186aadae3f93e3be967613cb3688e94849c8b84a7b9e56",
                 "sha256:a988718abfad80b6b157acce7bf130a30876d27603738ac39f140993246b25b3"
             ],
             "version": "==2.19"
@@ -215,7 +215,6 @@
             "hashes": [
                 "sha256:a671caba6211bf30c386f23267a4bcfcfe974fe15a322c058fcc8b0942ed186c"
             ],
-            "index": "pypi",
             "version": "==5.6.0"
         },
         "six": {
@@ -230,8 +229,11 @@
                 "sha256:82cef9b4aa4180be440598807903f618f07aebc0f61afe3135b81870edb1b1ad",
                 "sha256:dccece1609fae52d23af5e9b7418c7b74a3a1040048cf8ffe416521a6f29b8a4"
             ],
-            "index": "pypi",
             "version": "==2.0.1"
+        },
+        "tap-slack": {
+            "editable": true,
+            "path": "."
         },
         "yarl": {
             "hashes": [
@@ -249,6 +251,5 @@
             ],
             "version": "==1.3.0"
         }
-    },
-    "develop": {}
+    }
 }

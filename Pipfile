@@ -4,10 +4,9 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-singer-python = "==5.6.0"
-slackclient = "==2.0.1"
 
 [dev-packages]
+tap-slack = {editable = true,path = "."}
 
 [requires]
 python_version = "3.7"
