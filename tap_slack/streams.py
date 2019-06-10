@@ -2,6 +2,7 @@ from slack import WebClient
 
 import singer
 import os
+import inspect
 import time
 
 
