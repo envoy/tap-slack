@@ -16,8 +16,16 @@ class SlackStream():
         self.catalog_stream = catalog_stream
         self.state = state
 
+    def get_class_path(self):
+        return os.path.dirname(inspect.getfile(self.__class__))
+
     def load_schema(self):
-        return singer.utils.load_json(f"tap_slack/schemas/{self.name}.json")
+        #return singer.utils.load_json(f"tap_slack/schemas/{self.name}.json")
+        return singer.utils.load_json(
+            os.path.normpath(
+                os.path.join(
+                    self.get_class_path(),
+                    '../schemas/{}.json'.format(name))))
 
     def write_schema(self):
         schema = self.load_schema()
