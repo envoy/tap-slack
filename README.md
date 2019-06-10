@@ -74,3 +74,5 @@ The `Users` stream _does_ store information about when a User record was last up
  - Primary Key Column: `id`
  - Replication Strategy: `INCREMENTAL`
  - API Documentation: [Link](https://api.slack.com/methods/users.list)
+
+Copyright &copy; 2019 Stitch
