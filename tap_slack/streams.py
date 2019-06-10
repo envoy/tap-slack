@@ -141,7 +141,7 @@ class UsersStream(SlackStream):
 
 AVAILABLE_STREAMS = [
     ConversationsStream,
-    UsersStream
+    UsersStream,
     ConversationMembersStream,
     ConversationHistoryStream
 ]
