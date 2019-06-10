@@ -26,7 +26,7 @@ class SlackStream():
             os.path.normpath(
                 os.path.join(
                     self.get_class_path(),
-                    '../schemas/{}.json'.format(name))))
+                    '../schemas/{}.json'.format(self.name))))
 
     def write_schema(self):
         schema = self.load_schema()
