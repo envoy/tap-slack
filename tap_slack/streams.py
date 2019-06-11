@@ -16,8 +16,12 @@ class SlackStream():
         self.catalog_stream = catalog_stream
         self.state = state
 
+    def get_abs_path(self, path):
+        return os.path.join(os.path.dirname(os.path.realpath(__file__)), path)
+
     def load_schema(self):
-        return singer.utils.load_json(f"tap_slack/schemas/{self.name}.json")
+        schema_path = self.get_abs_path('schemas')
+        return singer.utils.load_json('{}/{}.json'.format(schema_path, self.name))
 
     def write_schema(self):
         schema = self.load_schema()
@@ -141,7 +145,7 @@ class UsersStream(SlackStream):
 
 AVAILABLE_STREAMS = [
     ConversationsStream,
-    UsersStream
+    UsersStream,
     ConversationMembersStream,
     ConversationHistoryStream
 ]
