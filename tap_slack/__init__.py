@@ -9,7 +9,7 @@ LOGGER = singer.get_logger()
 
 def discover(webclient):
     LOGGER.info('Starting Discovery..')
-    streams = [stream(webclient) for stream in AVAILABLE_STREAMS]
+    streams = [stream_class(webclient) for _,stream_class in AVAILABLE_STREAMS.items()]
     catalog = generate_catalog(streams)
     json.dump(catalog, sys.stdout, indent=2)
     LOGGER.info("Finished Discovery..")
@@ -18,16 +18,11 @@ def discover(webclient):
 def sync(webclient, config, catalog, state):
 
     LOGGER.info('Starting Sync..')
-    streams_to_sync = []
-    for catalog_stream in catalog.streams:
-        for available_stream in AVAILABLE_STREAMS:
-            if available_stream.name == catalog_stream.stream:
-                to_sync = available_stream(webclient=webclient, config=config, catalog_stream=catalog_stream, state=state)
-                streams_to_sync.append(to_sync)
-
-    for stream in streams_to_sync:
+    for catalog_entry in catalog.get_selected_streams(state):
+        stream = AVAILABLE_STREAMS[catalog_entry.stream](webclient=webclient, config=config, catalog_stream=catalog_entry.stream, state=state)
+        LOGGER.info('Syncing stream: %s', catalog_entry.stream)
         stream.write_schema()
-        stream.sync()
+        stream.sync(catalog_entry.metadata)
         stream.write_state()
 
     LOGGER.info('Finished Sync..')
@@ -40,7 +35,7 @@ def main():
 
     if args.discover:
         discover(webclient=webclient)
-    else:
+    elif args.catalog:
         sync(webclient=webclient, config=args.config, catalog=args.catalog, state=args.state)
 
 if __name__ == '__main__':
